@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MapLibre Globe Demo</title>
+    <link href="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.css" rel="stylesheet" />
+    <script src="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js"></script>
+    <link href="css/style.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <h1>MapLibre Globe Demo</h1>
+    <div id="map"></div>
+    <button id="quiz-toggle-btn" class="quiz-toggle-btn">🌍 クイズ開始</button>
+    <div id="quiz-feedback" class="quiz-feedback"></div>
+    <div id="quiz-bar" class="quiz-bar" style="display: none">
+        <div class="quiz-question">
+            この国は? <strong id="quiz-country-name"></strong>
+        </div>
+        <div class="quiz-score">
+            <span id="quiz-score">0</span> / <span id="quiz-total">0</span>
+        </div>
+        <button id="quiz-giveup-btn">降参</button>
+        <button id="quiz-quit-btn">やめる</button>
+        <button id="quiz-start-btn">クイズ開始</button>
+    </div>
+
+    <button id="search-toggle-btn" class="search-toggle-btn">🔍 検索</button>
+    <div id="search-bar" class="search-bar" style="display:none;">
+        <input list="country-list" id="search-input" placeholder="国名を入力(日本語)">
+        <datalist id="country-list"></datalist>
+        <button id="search-close-btn">×</button>
+    </div>
+
+    <button id="layer-panel-toggle" class="layer-panel-toggle">
+        <i class="ti ti-layers-intersect"></i> レイヤー
+    </button>
+
+    <div id="layer-panel" class="layer-panel" style="display:none;">
+        <div class="panel-section-title">表示レイヤー</div>
+        <label><input type="checkbox" id="toggle-capitals" checked> 首都</label>
+        <label><input type="checkbox" id="toggle-earthquakes"> 地震(24時間)</label>
+        <label><input type="checkbox" id="toggle-heritage"> 世界遺産</label>
+
+        <div class="panel-divider"></div>
+
+        <div class="panel-section-title">色分け(コロプレス図)</div>
+        <select id="choropleth-select">
+            <option value="none" selected>色分けなし</option>
+            <option value="POP_EST">人口</option>
+            <option value="GDP_MD">GDP</option>
+            <option value="INCOME_GRP">所得区分</option>
+        </select>
+    </div>
+
+    <script src="js/map-core.js"></script>
+    <script src="js/choropleth.js"></script>
+    <script src="js/quiz.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/ui-panel.js"></script>
+
+</body>
+
+</html>
