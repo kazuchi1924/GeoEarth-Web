@@ -4,12 +4,14 @@
 
 <h1>JavaScript Test</h1>
 
+<p id="msg">待機中</p>
+
 <button id="btn">クリック</button>
 
 <script>
-document.getElementById("btn").onclick = function(){
-    alert("JavaScript OK");
-};
+document.getElementById("btn").addEventListener("click", function () {
+    document.getElementById("msg").textContent = "JavaScript OK";
+});
 </script>
 
 </body>
