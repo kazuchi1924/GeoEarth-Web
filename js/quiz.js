@@ -4,7 +4,7 @@ let quizIndex = 0;
 let quizScore = 0;
 let currentAnswerId = null;
 
-document.getElementById("quiz-start-btn").addEventListener("click", startQuiz);
+//document.getElementById("quiz-start-btn").addEventListener("click", startQuiz);
 document.getElementById('quiz-giveup-btn').addEventListener('click', giveUpQuestion);
 document.getElementById('quiz-quit-btn').addEventListener('click', quitQuiz);
 
