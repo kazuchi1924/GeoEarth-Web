@@ -31,6 +31,7 @@ function startQuiz() {
     document.getElementById('layer-panel-toggle').style.display = 'none';
     document.getElementById('layer-panel').style.display = 'none'; // 開いてたら閉じる
 
+    document.getElementById('search-toggle-btn').style.display = 'none';
 }
 
 function showNextQuestion() {
@@ -98,4 +99,7 @@ function quitQuiz() {
     document.getElementById('quiz-toggle-btn').style.display = 'block';
 
     document.getElementById('layer-panel-toggle').style.display = 'block'; // 元に戻す
+
+    document.getElementById('search-toggle-btn').style.display = 'block';
+
 }
