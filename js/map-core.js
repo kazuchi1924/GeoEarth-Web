@@ -306,6 +306,20 @@ function getIncomeClass(incomeGrp) {
 }
 
 map.on('click', (e) => {
+
+    const lngLat = map.unproject(e.point);
+    const reprojected = map.project(lngLat);
+
+    const dx = reprojected.x - e.point.x;
+    const dy = reprojected.y - e.point.y;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    if (distance > 2) {
+        // クランプが発生 = 地球儀の外(宇宙)をクリックした
+        return; // 何もしない
+    }
+
+
     // クイズモード中は国だけを対象にする(他のレイヤーが上に乗ってても無視)
     if (quizMode) {
         const countryFeatures = map.queryRenderedFeatures(e.point, { layers: ['my-countries-fill'] });

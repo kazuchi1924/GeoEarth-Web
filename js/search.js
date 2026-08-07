@@ -34,20 +34,57 @@ function closeSearch() {
 
 document.getElementById('search-input').addEventListener('change', (e) => {
     const name = e.target.value;
-    const feature = allCountryFeatures.find(f => f.properties.NAME_JA === name);
-    if (!feature) return;
+    // 同じ国名を持つ断片を全部集める(1件とは限らない)
+    const matchingFeatures = allCountryFeatures.filter(f => f.properties.NAME_JA === name);
+    if (matchingFeatures.length === 0) return;
 
-    flyToCountry(feature);
+    flyToCountry(matchingFeatures);
 });
 
-function flyToCountry(feature) {
-    const bounds = getFeatureBounds(feature);
+function flyToCountry(features) {
+    const bounds = new maplibregl.LngLatBounds();
+    let refLng = null;
+
+    features.forEach((f) => {
+        const fb = getFeatureBounds(f);
+        let ne = fb.getNorthEast();
+        let sw = fb.getSouthWest();
+        let centerLng = (ne.lng + sw.lng) / 2;
+
+        if (refLng === null) {
+            refLng = centerLng;
+        } else {
+            while (centerLng - refLng > 180) {
+                ne.lng -= 360; sw.lng -= 360; centerLng -= 360;
+            }
+            while (refLng - centerLng > 180) {
+                ne.lng += 360; sw.lng += 360; centerLng += 360;
+            }
+        }
+
+        bounds.extend(ne);
+        bounds.extend(sw);
+    });
+
     map.fitBounds(bounds, { padding: 60, duration: 1500 });
 
-    // 少し引きの状態が落ち着いてから、ポップアップとハイライトを出す
+    // 一番面積が大きい断片を選ぶ(小島にポップアップが乗るのを防ぐ)
+    let largestFeature = features[0];
+    let largestArea = 0;
+    features.forEach((f) => {
+        const area = turf.area(f);
+        if (area > largestArea) {
+            largestArea = area;
+            largestFeature = f;
+        }
+    });
+
+    const onLandPoint = turf.pointOnFeature(largestFeature);
+    const popupLngLat = onLandPoint.geometry.coordinates;
+
     setTimeout(() => {
-        showCountryPopup(feature, bounds.getCenter());
-        highlightSearchResult(feature.properties.ADM0_A3);
+        showCountryPopup(largestFeature, popupLngLat);
+        highlightSearchResult(largestFeature.properties.ADM0_A3);
     }, 1600);
 }
 
