@@ -1,11 +1,10 @@
 let allCountryFeatures = [];
 
-document.getElementById('search-toggle-btn').addEventListener('click', () => {
-    // 国データを取得(クイズのstartQuizと同じ手法)
+
+function openSearch() {
     allCountryFeatures = map.querySourceFeatures('my-countries')
         .filter(f => f.properties.NAME_JA);
 
-    // datalistの選択肢を作る
     const datalist = document.getElementById('country-list');
     datalist.innerHTML = '';
     allCountryFeatures.forEach(f => {
@@ -14,17 +13,23 @@ document.getElementById('search-toggle-btn').addEventListener('click', () => {
         datalist.appendChild(option);
     });
 
-    document.getElementById('search-toggle-btn').style.display = 'none';
     document.getElementById('search-bar').style.display = 'flex';
     document.getElementById('search-input').focus();
-});
+
+    document.getElementById('layer-panel-toggle').style.display = 'none';
+    document.getElementById('layer-panel').style.display = 'none'; // 開いてたら閉じる
+
+}
 
 document.getElementById('search-close-btn').addEventListener('click', closeSearch);
 
 function closeSearch() {
     document.getElementById('search-bar').style.display = 'none';
-    document.getElementById('search-toggle-btn').style.display = 'block';
+    //document.getElementById('search-toggle-btn').style.display = 'block';
     document.getElementById('search-input').value = '';
+    document.getElementById('main-menu-toggle').style.display = 'block';
+    document.getElementById('layer-panel-toggle').style.display = 'block';
+
 }
 
 document.getElementById('search-input').addEventListener('change', (e) => {

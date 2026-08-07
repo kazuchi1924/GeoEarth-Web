@@ -13,7 +13,15 @@
 <body>
     <h1>MapLibre Globe Demo</h1>
     <div id="map"></div>
-    <button id="quiz-toggle-btn" class="quiz-toggle-btn">🌍 クイズ開始</button>
+
+    <button id="main-menu-toggle" class="main-menu-toggle">☰</button>
+
+    <div id="main-menu" class="main-menu" style="display:none;">
+        <button id="menu-quiz-btn">🌍 クイズ</button>
+        <button id="menu-search-btn">🔍 検索</button>
+    </div>    
+
+    <!-- <button id="quiz-toggle-btn" class="quiz-toggle-btn">🌍 クイズ開始</button> -->
     <div id="quiz-feedback" class="quiz-feedback"></div>
     <div id="quiz-bar" class="quiz-bar" style="display: none">
         <div class="quiz-question">
@@ -27,7 +35,7 @@
         <button id="quiz-start-btn">クイズ開始</button>
     </div>
 
-    <button id="search-toggle-btn" class="search-toggle-btn">🔍 検索</button>
+    <!-- <button id="search-toggle-btn" class="search-toggle-btn">🔍 検索</button> -->
     <div id="search-bar" class="search-bar" style="display:none;">
         <input list="country-list" id="search-input" placeholder="国名を入力(日本語)">
         <datalist id="country-list"></datalist>
@@ -60,6 +68,7 @@
     <script src="js/quiz.js"></script>
     <script src="js/search.js"></script>
     <script src="js/ui-panel.js"></script>
+    <script src="js/menu.js"></script>
 
 </body>
 

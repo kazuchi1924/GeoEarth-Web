@@ -7,13 +7,10 @@ let currentAnswerId = null;
 document.getElementById("quiz-start-btn").addEventListener("click", startQuiz);
 document.getElementById('quiz-giveup-btn').addEventListener('click', giveUpQuestion);
 document.getElementById('quiz-quit-btn').addEventListener('click', quitQuiz);
-document.getElementById("quiz-toggle-btn").addEventListener("click", () => {
-        document.getElementById("quiz-bar").style.display = "flex";
-        document.getElementById("quiz-toggle-btn").style.display = "none";
-        startQuiz();
-    });
 
 function startQuiz() {
+    document.getElementById("quiz-bar").style.display = "flex";
+
     const allFeatures = map.querySourceFeatures("my-countries"); // 読み込み済みの全国データ取得
     // NAME_JAが無い/小さすぎる地物を除外(お好みで調整)
     quizCountries = allFeatures
@@ -31,7 +28,6 @@ function startQuiz() {
     document.getElementById('layer-panel-toggle').style.display = 'none';
     document.getElementById('layer-panel').style.display = 'none'; // 開いてたら閉じる
 
-    document.getElementById('search-toggle-btn').style.display = 'none';
 }
 
 function showNextQuestion() {
@@ -96,10 +92,6 @@ function giveUpQuestion() {
 function quitQuiz() {
     quizMode = false;
     document.getElementById('quiz-bar').style.display = 'none';
-    document.getElementById('quiz-toggle-btn').style.display = 'block';
-
-    document.getElementById('layer-panel-toggle').style.display = 'block'; // 元に戻す
-
-    document.getElementById('search-toggle-btn').style.display = 'block';
-
+    document.getElementById('layer-panel-toggle').style.display = 'block';
+    document.getElementById('main-menu-toggle').style.display = 'block';
 }
