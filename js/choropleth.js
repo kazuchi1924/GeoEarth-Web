@@ -6,6 +6,9 @@ document.getElementById('choropleth-select').addEventListener('change', (e) => {
 function applyChoropleth(attribute) {
     if (attribute === 'none') {
         map.setPaintProperty('my-countries-fill', 'fill-color', '#627BC1');
+        map.setPaintProperty('my-countries-fill', 'fill-opacity', 0.0);
+        map.setPaintProperty('my-countries-fill', 'line-width', 0);
+        //map.setPaintProperty('my-countries-fill', 'fill-color', '#627BC1');
         return;
     }
 
@@ -38,4 +41,7 @@ function applyChoropleth(attribute) {
     }
 
     map.setPaintProperty('my-countries-fill', 'fill-color', expression);
+    //map.setPaintProperty('my-countries-fill', 'fill-color', '#627BC1');
+    map.setPaintProperty('my-countries-fill', 'fill-opacity', 0.3);
+    map.setPaintProperty('my-countries-fill', 'line-width', 1);
 }

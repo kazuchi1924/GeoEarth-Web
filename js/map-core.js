@@ -110,7 +110,7 @@ map.on("load", () => {
         source: "my-countries",
         paint: {
             'fill-color': '#627BC1', // 色分けなしの初期色
-            'fill-opacity': 0.3
+            'fill-opacity': 0.0
         },
         // paint: {
         //     // POP_EST（人口）の値に応じてステップ分けで色を変える
@@ -148,7 +148,7 @@ map.on("load", () => {
         source: "my-countries",
         paint: {
             "line-color": "#ffffff",
-            "line-width": 1,
+            "line-width": 0,
         },
     });
 
