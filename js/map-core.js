@@ -9,6 +9,7 @@ const map = new maplibregl.Map({
     projection: { type: "globe" }, // ← これがglobe表示の肝
 });
 
+
 // ============================================
 // [Windows/Android専用] Dart側から evaluateJavascript 経由で
 // window.loadCountriesData()が呼ばれる
@@ -97,6 +98,18 @@ ctx.strokeRect(2, 2, 6, 6);
 map.addImage("capital-square", ctx.getImageData(0, 0, 10, 10));
 
 map.on("load", () => {
+
+    // 背景図のラベル系レイヤーを非表示にする(ラベルが邪魔な場合)
+    const layers = map.getStyle().layers;
+
+    //labelレイヤーを非表示にする
+    layers.forEach(layer => {
+    if (layer.id.includes('label')) {
+        map.setLayoutProperty(layer.id, 'visibility', 'none');
+    }
+    });
+
+
     map.addSource("my-countries", {
         type: "geojson",
         data: "countries.geojson", // Web版はこれがそのままfetchされて成功する
